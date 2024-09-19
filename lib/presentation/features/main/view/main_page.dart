@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_store/presentation/features/main/widgets/goods_list.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -17,7 +18,7 @@ class _MainPageState extends State<MainPage> {
           child: Text('Store'),
         ),
       ),
-      body: Container(),
+      body: const GoodsList(),
     );
   }
 }

@@ -5,7 +5,7 @@ import 'dart:convert';
 class GoodDataSource {
   Future<List<Good>> fetchGoods() async {
     final response = await http.get(Uri.https('fakestoreapi.com', 'products'));
-    final jsonList = jsonDecode(response.body) as List<Map<String, dynamic>>;
-    return jsonList.map((element) => Good.fromJson(element)).toList();
+    final jsonList = jsonDecode(response.body) as List<dynamic>;
+    return jsonList.map((element) => Good.fromJson(element as Map<String, dynamic>)).toList();
   }
 }
