@@ -15,6 +15,7 @@ class GoodsList extends ConsumerWidget {
         crossAxisCount: 2,
         mainAxisSpacing: 4,
         crossAxisSpacing: 4,
+        mainAxisExtent: 300,
       ),
       itemCount: goods.length,
       itemBuilder: (context, index) {
