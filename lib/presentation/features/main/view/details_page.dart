@@ -8,9 +8,7 @@ class DetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Center(
-          child: Text('Details'),
-        ),
+        title: const Text('Details'),
       ),
       body: const Placeholder(),
     );
