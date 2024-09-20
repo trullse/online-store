@@ -1,27 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:online_store/domain/entities/good.dart';
+import 'package:yandex_maps_mapkit/mapkit.dart' hide Image;
+import 'package:yandex_maps_mapkit/mapkit_factory.dart';
+import 'package:yandex_maps_mapkit/yandex_map.dart';
 
-class DetailsPageBody extends StatelessWidget {
+class DetailsPageBody extends StatefulWidget {
   final Good good;
 
   const DetailsPageBody({super.key, required this.good});
+
+  @override
+  State<DetailsPageBody> createState() => _DetailsPageBodyState();
+}
+
+class _DetailsPageBodyState extends State<DetailsPageBody> {
+  MapWindow? _mapWindow;
+
+  @override
+  void initState() {
+    mapkit.onStart();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    mapkit.onStop();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.all(8),
       children: [
-        _DetailsImage(image: good.image),
+        _DetailsImage(image: widget.good.image),
         _DetailsCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                good.title,
+                widget.good.title,
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               Text(
-                '\$${good.price.toString()}',
+                '\$${widget.good.price.toString()}',
                 style: Theme.of(context)
                     .textTheme
                     .headlineLarge!
@@ -39,12 +61,16 @@ class DetailsPageBody extends StatelessWidget {
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               Text(
-                good.description,
+                widget.good.description,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             ],
           ),
         ),
+        SizedBox(
+          height: 400,
+          child: YandexMap(onMapCreated: (mapWindow) => _mapWindow = mapWindow),
+        )
       ],
     );
   }
