@@ -24,7 +24,10 @@ class GoodsList extends ConsumerWidget {
           image: goods[index].image,
           title: goods[index].title,
           price: goods[index].price,
-          onTap: () => context.go('/details'),
+          onTap: () => context.go(
+            '/details',
+            extra: goods[index],
+          ),
         );
       },
     );
