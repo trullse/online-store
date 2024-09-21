@@ -12,6 +12,7 @@ import 'package:yandex_maps_mapkit/src/bindings/image/image_provider.dart' as im
 
 class DetailsPageBody extends StatefulWidget {
   final Good good;
+  final homeLocation = const LocationPoint(latitude: 53.929936, longitude: 27.588795);
 
   const DetailsPageBody({super.key, required this.good});
 
@@ -134,16 +135,15 @@ class _DetailsPageBodyState extends State<DetailsPageBody> {
                                 _addRoutePolyline(route.geometry);
                                 _moveCameraToRoute(route.geometry);
                                 _addPlacemarks(
-                                  const LocationPoint(latitude: 55.751244, longitude: 37.618423),
-                                  const LocationPoint(latitude: 55.755814, longitude: 37.617673),
+                                  widget.homeLocation,
+                                  widget.good.storeLocation,
                                 );
                               }
                             },
                             onDrivingRoutesError: (yandex_runtime.Error error) {},
                           ),
-                          startPoint:
-                              const LocationPoint(latitude: 55.751244, longitude: 37.618423),
-                          endPoint: const LocationPoint(latitude: 55.755814, longitude: 37.617673),
+                          startPoint: widget.homeLocation,
+                          endPoint: widget.good.storeLocation,
                         );
                   },
                 );
