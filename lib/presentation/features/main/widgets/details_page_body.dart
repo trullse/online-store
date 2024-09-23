@@ -51,11 +51,16 @@ class _DetailsPageBodyState extends State<DetailsPageBody> {
             ],
           ),
         ),
-        SizedBox(
-          height: 400,
-          child: _DetailsCard(
-            child: Map(storeLocation: widget.good.storeLocation),
-          ),
+        LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            return _DetailsCard(
+              child: SizedBox(
+                width: constraints.maxWidth,
+                height: 400,
+                child: Map(storeLocation: widget.good.storeLocation),
+              ),
+            );
+          },
         ),
       ],
     );
