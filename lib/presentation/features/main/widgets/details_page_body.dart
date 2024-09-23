@@ -54,7 +54,7 @@ class _DetailsPageBodyState extends State<DetailsPageBody> {
         SizedBox(
           height: 400,
           child: _DetailsCard(
-            child: MapWidget(storeLocation: widget.good.storeLocation),
+            child: Map(storeLocation: widget.good.storeLocation),
           ),
         ),
       ],

@@ -10,20 +10,20 @@ import 'package:yandex_maps_mapkit/src/bindings/image/image_provider.dart' as im
 import 'package:online_store/domain/entities/location_point.dart';
 import 'package:online_store/presentation/di/injector.dart';
 
-class MapWidget extends StatefulWidget {
+class Map extends StatefulWidget {
   final LocationPoint homeLocation = const LocationPoint(latitude: 53.929936, longitude: 27.588795);
   final LocationPoint storeLocation;
 
-  const MapWidget({
+  const Map({
     super.key,
     required this.storeLocation,
   });
 
   @override
-  State<MapWidget> createState() => _MapWidgetState();
+  State<Map> createState() => _MapState();
 }
 
-class _MapWidgetState extends State<MapWidget> {
+class _MapState extends State<Map> {
   late MapWindow _mapWindow;
 
   @override
