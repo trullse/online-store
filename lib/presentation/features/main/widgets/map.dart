@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:online_store/presentation/viewmodel/maps_provider.dart';
 import 'package:yandex_maps_mapkit/directions.dart';
 import 'package:yandex_maps_mapkit/mapkit.dart' hide Image;
 import 'package:yandex_maps_mapkit/mapkit_factory.dart';
@@ -7,6 +8,7 @@ import 'package:yandex_maps_mapkit/yandex_map.dart';
 import 'package:yandex_maps_mapkit/runtime.dart' as yandex_runtime;
 import 'package:yandex_maps_mapkit/src/bindings/image/image_provider.dart' as image_provider;
 import 'package:online_store/domain/entities/location_point.dart';
+import 'package:online_store/presentation/di/injector.dart';
 
 class MapWidget extends StatefulWidget {
   final LocationPoint homeLocation = const LocationPoint(latitude: 53.929936, longitude: 27.588795);
@@ -84,32 +86,31 @@ class _MapWidgetState extends State<MapWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // return Consumer(
-    //   builder: (BuildContext context, WidgetRef ref, Widget? child) {
-    //     return YandexMap(
-    //       onMapCreated: (mapWindow) {
-    //         _mapWindow = mapWindow;
-    //         ref.watch(mapsProvider).buildRoute(
-    //               drivingSessionRouteListener: DrivingSessionRouteListener(
-    //                 onDrivingRoutes: (List<DrivingRoute> routes) {
-    //                   for (final route in routes) {
-    //                     _addRoutePolyline(route.geometry);
-    //                     _moveCameraToRoute(route.geometry);
-    //                     _addPlacemarks(
-    //                       widget.homeLocation,
-    //                       widget.storeLocation,
-    //                     );
-    //                   }
-    //                 },
-    //                 onDrivingRoutesError: (yandex_runtime.Error error) {},
-    //               ),
-    //               startPoint: widget.homeLocation,
-    //               endPoint: widget.storeLocation,
-    //             );
-    //       },
-    //     );
-    //   },
-    // );
-    return Container();
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, Widget? child) {
+        return YandexMap(
+          onMapCreated: (mapWindow) {
+            _mapWindow = mapWindow;
+            ref.read(mapsNotifierProvider(i.get()).notifier).buildRoute(
+                  drivingSessionRouteListener: DrivingSessionRouteListener(
+                    onDrivingRoutes: (List<DrivingRoute> routes) {
+                      for (final route in routes) {
+                        _addRoutePolyline(route.geometry);
+                        _moveCameraToRoute(route.geometry);
+                        _addPlacemarks(
+                          widget.homeLocation,
+                          widget.storeLocation,
+                        );
+                      }
+                    },
+                    onDrivingRoutesError: (yandex_runtime.Error error) {},
+                  ),
+                  startPoint: widget.homeLocation,
+                  endPoint: widget.storeLocation,
+                );
+          },
+        );
+      },
+    );
   }
 }
