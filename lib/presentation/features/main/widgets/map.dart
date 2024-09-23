@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:online_store/domain/usecases/module.dart';
 import 'package:yandex_maps_mapkit/directions.dart';
 import 'package:yandex_maps_mapkit/mapkit.dart' hide Image;
 import 'package:yandex_maps_mapkit/mapkit_factory.dart';
@@ -85,31 +84,32 @@ class _MapWidgetState extends State<MapWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        return YandexMap(
-          onMapCreated: (mapWindow) {
-            _mapWindow = mapWindow;
-            ref.watch(mapsProvider).buildRoute(
-                  drivingSessionRouteListener: DrivingSessionRouteListener(
-                    onDrivingRoutes: (List<DrivingRoute> routes) {
-                      for (final route in routes) {
-                        _addRoutePolyline(route.geometry);
-                        _moveCameraToRoute(route.geometry);
-                        _addPlacemarks(
-                          widget.homeLocation,
-                          widget.storeLocation,
-                        );
-                      }
-                    },
-                    onDrivingRoutesError: (yandex_runtime.Error error) {},
-                  ),
-                  startPoint: widget.homeLocation,
-                  endPoint: widget.storeLocation,
-                );
-          },
-        );
-      },
-    );
+    // return Consumer(
+    //   builder: (BuildContext context, WidgetRef ref, Widget? child) {
+    //     return YandexMap(
+    //       onMapCreated: (mapWindow) {
+    //         _mapWindow = mapWindow;
+    //         ref.watch(mapsProvider).buildRoute(
+    //               drivingSessionRouteListener: DrivingSessionRouteListener(
+    //                 onDrivingRoutes: (List<DrivingRoute> routes) {
+    //                   for (final route in routes) {
+    //                     _addRoutePolyline(route.geometry);
+    //                     _moveCameraToRoute(route.geometry);
+    //                     _addPlacemarks(
+    //                       widget.homeLocation,
+    //                       widget.storeLocation,
+    //                     );
+    //                   }
+    //                 },
+    //                 onDrivingRoutesError: (yandex_runtime.Error error) {},
+    //               ),
+    //               startPoint: widget.homeLocation,
+    //               endPoint: widget.storeLocation,
+    //             );
+    //       },
+    //     );
+    //   },
+    // );
+    return Container();
   }
 }

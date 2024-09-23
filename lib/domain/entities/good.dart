@@ -1,9 +1,5 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:online_store/domain/entities/location_point.dart';
 
-part 'good.g.dart';
-
-@JsonSerializable()
 class Good {
   final int id;
   final String title;
@@ -11,7 +7,6 @@ class Good {
   final String description;
   final String category;
   final String image;
-  final Map<String, num> rating;
   final LocationPoint storeLocation;
 
   Good({
@@ -21,13 +16,19 @@ class Good {
     required this.description,
     required this.category,
     required this.image,
-    required this.rating,
     this.storeLocation = const LocationPoint(latitude: 53.916281, longitude: 27.585937),
   });
 
-  factory Good.fromJson(Map<String, dynamic> json) => _$GoodFromJson(json);
-
-  Map<String, dynamic> toJson() => _$GoodToJson(this);
+  factory Good.fromJson(Map<String, dynamic> json) {
+    return Good(
+      id: json['id'] as int,
+      title: json['title'] as String,
+      price: (json['price'] is int) ? (json['price'] as int).toDouble() : json['price'] as double,
+      description: json['description'] as String,
+      category: json['category'] as String,
+      image: json['image'] as String,
+    );
+  }
 
   Good copyWith({
     int? id,
@@ -46,7 +47,6 @@ class Good {
       description: description ?? this.description,
       category: category ?? this.category,
       image: image ?? this.image,
-      rating: rating ?? this.rating,
       storeLocation: storeLocation ?? this.storeLocation,
     );
   }
