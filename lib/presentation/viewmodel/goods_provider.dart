@@ -2,7 +2,7 @@ import 'package:online_store/domain/data_interfaces/i_good_repository.dart';
 import 'package:online_store/domain/entities/good.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'goods_state_provider.g.dart';
+part 'goods_provider.g.dart';
 
 @riverpod
 class AsyncGoodsNotifier extends _$AsyncGoodsNotifier {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:online_store/presentation/features/main/widgets/good_card.dart';
-import 'package:online_store/presentation/viewmodel/goods_state_provider.dart';
+import 'package:online_store/presentation/viewmodel/goods_provider.dart';
 import 'package:online_store/presentation/di/injector.dart';
 
 class GoodsList extends ConsumerWidget {
